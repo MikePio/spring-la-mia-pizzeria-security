@@ -1,15 +1,16 @@
-package org.java.app.db.auth;
+package org.java.app.db.auth.pojo;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotNull;
 
-// * STEP 2 - AUTHENTICATION - creazione della classe User(id, username, password) in db.auth e creazione del costruttore + i getter e i setter
+// * STEP 2 - AUTHENTICATION - creazione della classe User(id, username, password) in db.auth.pojo e creazione del costruttore + i getter e i setter
 @Entity
 public class User {
 
@@ -24,6 +25,10 @@ public class User {
 	@Column(nullable = false)
 	@NotNull
 	private String password;
+
+  // * STEP 4 - AUTHENTICATION - collegamento / relazione tra tabelle nel database
+  @ManyToMany
+	private Set<Role> roles;
 
   public User() { }
   public User(String username, String password) {
@@ -62,3 +67,4 @@ public class User {
   }
 
 }
+

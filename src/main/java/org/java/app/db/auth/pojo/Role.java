@@ -1,4 +1,4 @@
-package org.java.app.db.auth;
+package org.java.app.db.auth.pojo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
-// * STEP 3 - AUTHENTICATION - creazione della classe Role(id, name) in db.auth e creazione del costruttore + i getter e i setter
+// * STEP 3 - AUTHENTICATION - creazione della classe Role(id, name) in db.auth.pojo e creazione del costruttore + i getter e i setter
 @Entity
 public class Role {
 
