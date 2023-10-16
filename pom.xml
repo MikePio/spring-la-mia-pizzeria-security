@@ -18,6 +18,17 @@
 	</properties>
 	<dependencies>
 
+<!-- * STEP 1 - AUTHENTICATION - installazione dipenzenda nel file pom -->
+		<!-- AUTHENTICATION -->	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
+
 <!-- Step 1 - inizializzazione progetto - per connettere il db con il progetto, inserire queste dipendenze -->
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
