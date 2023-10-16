@@ -1,0 +1,96 @@
+<!-- head -->
+<th:block th:replace="~{frags/head :: head}"></th:block>
+
+<body th:object="${pizza}" class="d-flex flex-column justify-content-between">
+
+  <!-- header -->
+  <th:block th:replace="~{frags/header :: header}"></th:block>
+  <main class="py-5 d-flex flex-column justify-content-center align-items-center text-center">
+
+    <!-- * step 3 - Validazione errori - creare il form  -->
+    <div class="d-flex flex-column align-items-center">
+
+      <h1 class="mb-4">New Pizza</h1>
+
+      <form th:object="${pizza}" method="POST" >
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="name" class="form-label">Name</label>
+          <!-- Messaggio di errore soluzione 1 per th:class (migliore) -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('name')} ? 'is-invalid' : '')" type="text" th:field="*{name}" name="name" placeholder="Es. Margherita">
+          <!-- Messaggio di errore soluzione 2 per th:class (peggiore) -->
+          <!-- <input th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'" type="text" class="form-control" th:field="*{name}" name="name" placeholder="Es. Margherita "> -->
+          <!-- * step 6 - Validazione errori - stampare i messaggi di errore in pagina   -->
+          <div th:if="${#fields.hasErrors('name')}">
+            <div th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+          <!-- messaggio di errore nel caso in cui il nome doveesse essere duplicato -->
+          <div th:if="${name_unique}">
+            <div class="text-danger my-2 text-start">[[${name_unique}]]</div>
+          </div>
+        </div>
+
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="description" class="form-label">Ingredients</label>
+          <!-- Messaggio di errore soluzione 1 per th:class (migliore) -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('description')} ? 'is-invalid' : '')" type="text" th:field="*{description}" name="description" placeholder="Es. pomodoro e mozzarella">
+          <!-- Messaggio di errore soluzione 2 per th:class (peggiore) -->
+          <!-- <input th:class="${#fields.hasErrors('description')} ? 'form-control is-invalid' : 'form-control'" type="text" class="form-control" th:field="*{description}" name="description" placeholder="Es. pomodoro e mozzarella"> -->
+          <!-- * step 6 - Validazione errori - stampare i messaggi di errore in pagina   -->
+          <div th:if="${#fields.hasErrors('description')}">
+            <div th:each="err : ${#fields.errors('description')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+        </div>
+
+        <!-- todo sostituirlo con un input d'immagini -->
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="photo" class="form-label">Image</label>
+          <!-- Messaggio di errore soluzione 1 per th:class (migliore) -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('photo')} ? 'is-invalid' : '')" type="text" th:field="*{photo}" name="photo" placeholder="Es. img/margherita">
+          <!-- Messaggio di errore soluzione 2 per th:class (peggiore) -->
+          <!-- <input th:class="${#fields.hasErrors('photo')} ? 'form-control is-invalid' : 'form-control'" type="text" class="form-control" th:field="*{photo}" name="photo" placeholder="Es. img/margherita"> -->
+          <!-- * step 6 - Validazione errori - stampare i messaggi di errore in pagina   -->
+          <div th:if="${#fields.hasErrors('photo')}">
+            <div th:each="err : ${#fields.errors('photo')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+        </div>
+
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="price" class="form-label">Price</label>
+          <!-- Messaggio di errore soluzione 1 per th:class (migliore) -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('price')} ? 'is-invalid' : '')" type="text" th:field="*{price}" name="price" placeholder="Es. 5,00">
+          <!-- Messaggio di errore soluzione 2 per th:class (peggiore) -->
+          <!-- <input th:class="${#fields.hasErrors('price')} ? 'form-control is-invalid' : 'form-control'" type="number" step="0.01" class="form-control" th:field="*{price}" name="price" placeholder="Es. 5,00"> -->
+          <!-- * step 6 - Validazione errori - stampare i messaggi di errore in pagina   -->
+          <div th:if="${#fields.hasErrors('price')}">
+            <div th:each="err : ${#fields.errors('price')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+        </div>
+
+        <div class="mb-3 text-start">
+          <span class="text-white">Ingredients</span>
+          <div class="mt-2"></div>
+          <div th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+            <input type="checkbox" th:id="${'ingredient-' + ingredient.id}" th:value="*{id}" th:field="${pizza.ingredients}" placeholder="Ingredient">
+            <label th:for="${'ingredient-' + ingredient.id}" class="form-label">[[*{nameWithInitialCapital}]]</label>
+          </div>
+        </div>
+
+        <!-- * tutti gli errori -->
+        <!-- <div th:each="err : ${#fields.allErrors()}" th:text="${err}" class="text-danger my-2 text-start"></div> -->
+
+        <button class="mt-3 btn btn-primary" type="submit" value="CREATE">Add Pizza</button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- link di tutte le pagine -->
+  <th:block th:replace="~{frags/links :: links}"></th:block>
+
+  <!-- footer -->
+  <th:block th:replace="~{frags/footer :: footer}"></th:block>
+
+</body>
+
+</html>

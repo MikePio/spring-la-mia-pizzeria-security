@@ -1,0 +1,69 @@
+<th:block th:replace="~{/frags/head :: head}"></th:block>
+
+<body class="d-flex flex-column justify-content-between">
+
+	<th:block th:replace="~{/frags/header :: header}"></th:block>
+
+	<main class="py-5 d-flex flex-column justify-content-center align-items-center">
+
+		<h1>Credits</h1>
+
+		<h1>Pizzeria Italia By: <a class="text-white" href="https://github.com/MikePio">MikePio</a></h1>
+
+		<h1 class="mb-3">Contacts</h1>
+
+		<div class="bg-dark text-center text-white">
+
+			<!-- Grid container -->
+			<div class="container pb-0">
+				<!-- Section: Social media -->
+				<section class="mb-3">
+
+					<!-- 
+			<a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i style="padding: 4px 0px;" class="fab fa-facebook-f"></i></a>
+	
+			<a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i style="padding: 4px 0px;" class="fab fa-twitter"></i></a>
+	
+			<a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i style="padding: 4px 0px;" class="fab fa-google"></i></a> 
+		-->
+
+					<!-- Instagram -->
+					<a class="btn btn-outline-light btn-floating m-1 rounded-circle"
+						href="https://www.instagram.com/michelepiopilla/" role="button"><i style="padding: 4px 0px;"
+							class="fab fa-instagram"></i></a>
+
+					<!-- Linkedin -->
+					<a class="btn btn-outline-light btn-floating m-1 rounded-circle"
+						href="https://www.linkedin.com/in/michele-pilla/" role="button"><i style="padding: 4px 0px;"
+							class="fab fa-linkedin-in"></i></a>
+
+					<!-- Github -->
+					<a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="https://github.com/MikePio"
+						role="button"><i style="padding: 4px 0px;" class="fab fa-github"></i></a>
+
+				</section>
+				<!-- Section: Social media -->
+			</div>
+		</div>
+
+		<!-- link di tutte le pagine -->
+		<!-- soluzione 1 -->
+		<!-- <th:block th:replace="../templates/frags/links :: links"></th:block> -->
+		<!-- soluzione 2 -->
+		<!-- <th:block th:replace="~{../templates/frags/links :: links}"></th:block> -->
+		<!-- soluzione 3 -->
+		<th:block th:replace="~{frags/links :: links}"></th:block>
+
+	</main>
+
+	<!-- per occupare lo spazio vuoto -->
+	<div style="height: 140px;">
+	</div>
+	<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+		© 2023 By
+		<a class="text-white" href="https://github.com/MikePio">@MikePio</a>
+	</div>
+
+</body>
+
+</html>

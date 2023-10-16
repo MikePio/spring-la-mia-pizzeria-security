@@ -1,0 +1,62 @@
+<!-- head -->
+<th:block th:replace="~{frags/head :: head}"></th:block>
+
+<body class="d-flex flex-column justify-content-between">
+
+  <!-- header -->
+  <th:block th:replace="~{frags/header :: header}"></th:block>
+  <main class="py-5 d-flex flex-column justify-content-center align-items-center text-center">
+
+    <div class="d-flex flex-column align-items-center">
+
+      <h1 class="mb-4">Edit the offer: [[${specialOffer.title}]]</h1>
+
+      <form th:object="${specialOffer}" method="POST" >
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="title" class="form-label">Title</label>
+          <input th:class="'form-control ' + (${#fields.hasErrors('title')} ? 'is-invalid' : '')" type="text" th:field="*{title}" name="title" placeholder="Es. Christmas Special Offer">
+          <div th:if="${#fields.hasErrors('title')}">
+            <div th:each="err : ${#fields.errors('title')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+        </div> 
+
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="startDate" class="form-label">Start date</label>
+          <!-- * STEP 3/3 - ottenere la data startDate salvata nel db e mostrarla nell'input dell'edit di specialOffer - inserire htmlStartDate in th:field -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('startDate')} ? 'is-invalid' : '')" type="date" th:field="*{htmlStartDate}" name="startDate" placeholder="Es. 10/12/2023">
+          <div th:if="${#fields.hasErrors('startDate')}">
+            <div th:each="err : ${#fields.errors('startDate')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+        </div>
+
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="endDate" class="form-label">End Date</label>
+          <!-- * STEP 3/3 - ottenere la data endDate salvata nel db e mostrarla nell'input dell'edit di specialOffer - inserire htmlEndDate in th:field -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('endDate')} ? 'is-invalid' : '')" type="date" th:field="*{htmlEndDate}" name="endDate" placeholder="Es. 07/01/2024">
+          <div th:if="${#fields.hasErrors('endDate')}">
+            <div th:each="err : ${#fields.errors('endDate')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+           <!-- * STEP 3 - validazione della end date che deve essere dopo la start date -->
+          <div th:if="${endDateBeforeStartDate} == true">
+            <div class="text-danger my-2 text-start">
+              <div>The end date must be after the start date</div>
+            </div>
+          </div> 
+        </div> 
+
+        <button class="mt-3 btn btn-primary" type="submit" value="SPECIALOFFER">Edit Offer</button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- link di tutte le pagine -->
+  <th:block th:replace="~{frags/links :: links}"></th:block>
+
+  <!-- footer -->
+  <th:block th:replace="~{frags/footer :: footer}"></th:block>
+
+</body>
+
+</html>

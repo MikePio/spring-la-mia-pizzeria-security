@@ -1,0 +1,44 @@
+<!-- head -->
+<th:block th:replace="~{/frags/head :: head}"></th:block>
+
+<body class="d-flex flex-column justify-content-between">
+
+	<!-- header -->
+	<th:block th:replace="~{/frags/header :: header}"></th:block>
+
+	<main class="py-5 d-flex flex-column justify-content-center align-items-center">
+
+		<h1 class="mb-3">Pizzeria Italia</h1>
+
+      <!-- soluzione 1 -->
+      <!-- <h2>[[${name}]]</h2> -->
+      <!-- soluzione 2 -->
+      <!-- <h2 th:text="${name}"></h2> -->
+  
+      <img class="my-2 w-50" src="img/pizzeria.jpg" alt="test-img">
+      <!-- <p class="w-75 text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio a culpa ratione quisquam. Similique dignissimos eveniet tenetur, dolores omnis, eligendi doloribus iste aliquid perferendis est fugiat! Nisi, debitis amet qui provident sunt modi eligendi magnam impedit dolore quaerat fuga ipsam error unde suscipit blanditiis doloribus cumque, neque, nobis quam laboriosam et at quia praesentium veniam. Natus reprehenderit quasi adipisci vero qui impedit quia quis nisi cum iusto alias nemo aliquam error soluta debitis sit sapiente fugiat dicta, optio deserunt iste. Quisquam facilis enim dolore nihil, doloribus quasi asperiores hic alias! Consequatur eveniet neque cupiditate est corrupti quos hic magni cumque porro distinctio voluptatem placeat iste architecto ad tenetur, totam omnis quasi nesciunt modi voluptatum, rem provident ex. Est nobis sed quaerat accusamus tenetur porro laborum adipisci dolore id iure. Nam, excepturi porro. Distinctio id eveniet, eos at sit nostrum est, nobis impedit quia repellat quis ad rem ratione. Deserunt eaque, soluta officia deleniti doloremque inventore? Ipsam quod sint culpa ratione repellendus reprehenderit odio obcaecati omnis aut doloremque? Ipsa eum voluptate, adipisci doloremque incidunt ab hic beatae obcaecati cum sunt, totam fuga nisi. Sit cumque itaque quisquam officia, quidem nostrum culpa totam sunt amet in error, cupiditate eius dignissimos! Enim, rerum.</p> -->
+      <p class="w-75 my-2 text-center">Welcome to Pizzeria Italia, where pizza is an art form! Our mouthwatering pizzas are crafted with passion and tradition, using the finest ingredients imported from Italy. Whether you prefer the classic Margherita or crave something more adventurous like our Diavola, each bite is a delightful journey through authentic Italian flavors. Our wood-fired oven ensures a perfect, crispy crust every time. 
+      <br><br>But we're more than just pizza! Explore our menu to discover a wide variety of delectable pastas, fresh salads, and irresistible desserts. Our friendly staff is dedicated to providing you with a memorable dining experience, whether you choose to dine in, take out, or have it delivered to your doorstep.
+      <br><br>Come and savor the taste of Italy at Pizzeria Italia. Buon appetito!</p>
+			
+			<div class="mt-3 d-flex align-items-center justify-content-center">
+				<a href="/pizzas" class="me-3 btn btn-primary d-flex align-items-center justify-content-center">Go to the menu</a>
+				<a href="/pizza-create" class="btn btn-primary d-flex align-items-center justify-content-center">Add a new pizza</a>
+			</div>
+
+		</main>
+
+		<!-- link di tutte le pagine -->
+		<!-- soluzione 1 -->
+		<!-- <th:block th:replace="../templates/frags/links :: links"></th:block> -->
+		<!-- soluzione 2 -->
+		<!-- <th:block th:replace="~{../templates/frags/links :: links}"></th:block> -->
+		<!-- soluzione 3 -->
+		<th:block th:replace="~{frags/links :: links}"></th:block>
+
+	<!-- footer -->
+	<th:block th:replace="~{/frags/footer :: footer}"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!-- head -->
+<th:block th:replace="~{frags/head :: head}"></th:block>
+
+<body th:object="${ingredient}" class="d-flex flex-column justify-content-between">
+
+  <!-- header -->
+  <th:block th:replace="~{frags/header :: header}"></th:block>
+  <main class="py-5 d-flex flex-column justify-content-center align-items-center text-center">
+
+    <div class="d-flex flex-column align-items-center">
+
+      <h1 class="mb-4">New Ingredient</h1>
+
+      <form th:object="${ingredient}" method="POST" >
+        <div class="mb-3 text-start" style="width: 150vh; max-width: 73vw;">
+          <label for="name" class="form-label">Name</label>
+          <!-- Messaggio di errore soluzione 1 per th:class (migliore) -->
+          <input th:class="'form-control ' + (${#fields.hasErrors('name')} ? 'is-invalid' : '')" type="text" th:field="*{name}" name="name" placeholder="Es. mozzarella">
+          <!-- Messaggio di errore soluzione 2 per th:class (peggiore) -->
+          <!-- <input th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'" type="text" class="form-control" th:field="*{name}" name="name" placeholder="Es. mozzarella"> -->
+          <div th:if="${#fields.hasErrors('name')}">
+            <div th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger my-2 text-start"></div>
+          </div>
+          <!-- messaggio di errore nel caso in cui il nome doveesse essere duplicato -->
+          <div th:if="${name_unique}">
+            <div class="text-danger my-2 text-start">[[${name_unique}]]</div>
+          </div>
+        </div>
+
+        <!-- * tutti gli errori -->
+        <!-- <div th:each="err : ${#fields.allErrors()}" th:text="${err}" class="text-danger my-2 text-start"></div> -->
+
+        <button class="mt-3 btn btn-primary" type="submit" value="CREATE">Add Ingredient</button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- link di tutte le pagine -->
+  <th:block th:replace="~{frags/links :: links}"></th:block>
+
+  <!-- footer -->
+  <th:block th:replace="~{frags/footer :: footer}"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+body {
+  /* background-color: #303030; */
+  background-color: #212529;
+  /* color: #0282f9; */
+  color: white ;
+  /* font-family: Arial, Helvetica, sans-serif; */
+
+  /* todo Fare il sito con questi colori */
+  /* background-color: #F6EFD3; */
+  /* color: #000000; */
+}
+
+h1, span {
+  /* color: #4548FF ; */
+  color: #0282f9;
+}
+
+header a, .def-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* navbar */
+.nav-index {
+  height: 80px;
+}
+
+.search-bar{
+  width: 38% !important;
+  height: 30px !important;
+}
+
+.btn-nav{
+  min-width: 60px;
+  height: 30px;
+}
+
+.btn-icon{
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+}
+
+/* main */
+main{
+  /* 100vh - altezza nav-bar - altezza footer */
+  /* min-height: calc(100vh - 230px); */
+  
+  /* 100vh - altezza nav-bar - altezza footer */
+  /* min-height: calc(100vh - 260px); */
+  /* 100vh - altezza nav-bar - altezza footer - altezza all-links 30px - margin-top di all-links 1rem=16px */
+  min-height: calc(100vh - 276px);
+}
+
+main img{
+  width: 60%;
+}
+
+.fw-custom{
+  font-weight: 500;
+}
+
+/* all-links */
+.all-links{
+  height: 30px;
+}
+
+/* pagina index */
+.img-item-index-page{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+}
+
+/* pagina di dettaglio */
+.img-show-page{
+  
+  width: 35%;
+}
+
+@media (max-width: 769px) {
+  .img-show-page {
+    width: 50% !important;
+  }
+
+  .card .btn-nav{
+    min-width: 1px !important;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 426px) {
+  .img-show-page {
+    width: 75% !important;
+  }
+}
