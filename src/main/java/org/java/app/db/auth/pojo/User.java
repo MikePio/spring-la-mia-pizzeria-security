@@ -1,6 +1,11 @@
 package org.java.app.db.auth.pojo;
 
+import java.util.Collection;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +17,7 @@ import jakarta.validation.constraints.NotNull;
 
 // * STEP 2 - AUTHENTICATION - creazione della classe User(id, username, password) in db.auth.pojo e creazione del costruttore + i getter e i setter
 @Entity
-public class User {
+public class User implements UserDetails { // * STEP 5.9 - AUTHENTICATION - implements UserDetails nella classe pojo User.java per inserire dei metodi in modo automatico: getAuthorities, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled
 
   @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,10 +66,33 @@ public class User {
     this.password = password;
   }
 
+  // * STEP 5.12 - AUTHENTICATION - creare i metodi getter e setter per Roles
+  public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
   @Override
   public String toString() {
     return "\nUser \nid = " + id + "\nusername=" + username + "\npassword = " + password;
   }
+
+  // * STEP 5.10 - AUTHENTICATION - al metodo getAuthorities implementato in modo automatico trasformare il set di ruoli in una collection di GrantedAuthority
+  @Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+    
+    // * STEP 5.13 - AUTHENTICATION - inserire qui il metodo getRoles() e mapparlo
+    return getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getName())).toList();
+  }
+    
+  // * STEP 5.11 - AUTHENTICATION - inserire il return true ai metodi implementati in modo automatico: isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled
+  @Override public boolean isAccountNonExpired() { return true; }
+	@Override public boolean isAccountNonLocked() { return true; }
+	@Override public boolean isCredentialsNonExpired() { return true; }
+	@Override public boolean isEnabled() { return true; }
 
 }
 
