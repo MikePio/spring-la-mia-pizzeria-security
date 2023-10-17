@@ -46,4 +46,19 @@ public class Role {
     return "\nRole \nid = " + id + "\nname = " + name;
   }
   
+  @Override
+	public int hashCode() {
+		
+		return getId();
+	}
+
+  @Override
+	public boolean equals(Object obj) {
+		
+		if (!(obj instanceof Role)) return false;
+		
+		Role objRole = (Role) obj;
+		
+		return getId() == objRole.getId();
+	}
 }

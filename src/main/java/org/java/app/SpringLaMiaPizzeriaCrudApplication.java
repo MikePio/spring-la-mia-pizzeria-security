@@ -2,6 +2,10 @@ package org.java.app;
 
 import java.time.LocalDate;
 
+import org.java.app.db.auth.pojo.Role;
+import org.java.app.db.auth.pojo.User;
+import org.java.app.db.auth.service.RoleService;
+import org.java.app.db.auth.service.UserService;
 import org.java.app.db.pojo.Ingredient;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.SpecialOffer;
@@ -12,12 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 // * STEP 6 vengono creati gli oggetti con i propri dati che verranno inseriti come righe della tabella nel database
 // * implementare CommandLineRunner
 // * aggiungere @Autowired private PizzaService pizzaService;
 // * creare nel metodo run degli oggetti
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "org.java.app")
 public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 
 	@Autowired
@@ -30,6 +35,14 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.3/3.5 - INSERIRE DATI NEL DB --> importazione del file service nel file Application
 	@Autowired
 	private IngredientService ingredientService;
+	
+	// * STEP 6.2 - AUTHENTICATION - Importo il file RoleService nel file application
+	@Autowired
+	private RoleService roleService;
+
+	// * STEP 6.3 - AUTHENTICATION - Importo il file UserService nel file application
+	@Autowired
+	private UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -71,6 +84,24 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		specialOfferService.save(specialOffer2);
 		specialOfferService.save(specialOffer3);
 		specialOfferService.save(specialOffer4);
+
+		// * STEP 6.4 - AUTHENTICATION - crea due oggetti Role, uno chiamato "ADMIN" e l'altro "USER" e succesivamente vengono salvati nel db nel file application
+		Role admin = new Role("ADMIN");
+		Role user = new Role("USER");
+		
+		roleService.save(admin);
+		roleService.save(user);
+		
+		// * STEP 6.5 - AUTHENTICATION - utilizza un algoritmo di crittografia bcrypt con il metodo BCryptPasswordEncoder().encode per cifrare le password pwsAdmin, pwsUser
+		final String pwsAdmin = new BCryptPasswordEncoder().encode("123");
+		final String pwsUser = new BCryptPasswordEncoder().encode("123");
+		
+		// * STEP 6.6 - AUTHENTICATION - crea due oggetti User, uno chiamato "admin1" e l'altro "user1" e succesivamente vengono salvati nel db  nel file application
+		User admin1 = new User("admin1", pwsAdmin, admin, user);
+		User user1 = new User("user1", pwsUser, user);
+		
+		userService.save(admin1);
+		userService.save(user1);
 	}
 
 }

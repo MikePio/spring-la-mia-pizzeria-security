@@ -1,6 +1,8 @@
 package org.java.app.db.auth.pojo;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,14 +35,16 @@ public class User implements UserDetails { // * STEP 5.9 - AUTHENTICATION - impl
 	private String password;
 
   // * STEP 4 - AUTHENTICATION - collegamento / relazione tra tabelle nel database
-  @ManyToMany
-	private Set<Role> roles;
+  @ManyToMany(fetch = FetchType.EAGER) // * STEP 6.7 - AUTHENTICATION - aggiungere (fetch = FetchType.EAGER) a destra di @ManyToMany nel file User.java
+	
+  private Set<Role> roles;
 
   public User() { }
-  public User(String username, String password) {
+  public User(String username, String password, Role... roles) {   // * STEP 5.12 - AUTHENTICATION - PARTE 1/2 aggiungere al costruttore i parametri Role e creare i metodi getter e setter per Roles
     
     setUsername(username);
     setPassword(password);
+    setRoles(new HashSet<>(Arrays.asList(roles)));
   }
   
   public int getId() {
@@ -66,7 +71,7 @@ public class User implements UserDetails { // * STEP 5.9 - AUTHENTICATION - impl
     this.password = password;
   }
 
-  // * STEP 5.12 - AUTHENTICATION - creare i metodi getter e setter per Roles
+  // * STEP 5.12 - AUTHENTICATION - PARTE 2/2 creare i metodi getter e setter per Roles e aggiungere setRole al costruttore
   public Set<Role> getRoles() {
 		return roles;
 	}
