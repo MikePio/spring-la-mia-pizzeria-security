@@ -5,6 +5,6 @@
   <!-- <a class="text-white me-3" th:href="@{/}">Home</a> -->
 
   <a class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover text-white me-3" href="/pizzas">Menu</a>
-  <a class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover text-white me-3" href="/ingredients">Ingredients</a>
+  <a sec:authorize="hasAnyAuthority('ADMIN')"  class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover text-white me-3" href="/ingredients">Ingredients</a>
   <a class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover text-white " href="/credits">Credits</a>
 </div>

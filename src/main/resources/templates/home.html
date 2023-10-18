@@ -23,7 +23,7 @@
 			
 			<div class="mt-3 d-flex align-items-center justify-content-center">
 				<a href="/pizzas" class="me-3 btn btn-primary d-flex align-items-center justify-content-center">Go to the menu</a>
-				<a href="/pizza-create" class="btn btn-primary d-flex align-items-center justify-content-center">Add a new pizza</a>
+				<a sec:authorize="hasAnyAuthority('ADMIN')"  href="/pizza-create" class="btn btn-primary d-flex align-items-center justify-content-center">Add a new pizza</a>
 			</div>
 
 		</main>

@@ -9,9 +9,9 @@
 	<main class="py-5 d-flex flex-column justify-content-center align-items-center text-center mx-2">
 		<div class="d-flex align-items-center">
 			<h2 class="mb-2 me-2">[[*{name}]]</h2> 
-			<a th:href="@{/pizzas/update/{id}(id=*{id})}" class="btn-nav btn btn-warning fw-custom text-white def-link d-flex align-items-center justify-content-center mb-2 me-2">Edit</a>
+			<a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/pizzas/update/{id}(id=*{id})}" class="btn-nav btn btn-warning fw-custom text-white def-link d-flex align-items-center justify-content-center mb-2 me-2">Edit</a>
 			<!-- * DELETE - (ULTIMO) STEP 3 - creare il form per l'eliminazione -->
-			<form th:action="@{/pizzas/delete/{id}(id=*{id})}" method="POST" class="d-inline mb-2" onsubmit="return confirm('Confirm deletion of this pizza?')">
+			<form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="POST" class="d-inline mb-2" onsubmit="return confirm('Confirm deletion of this pizza?')">
 				<!-- * aggiungere DELETE come value -->
 				<button type="submit" value="DELETE" class="btn-nav btn btn-danger fw-custom d-flex align-items-center justify-content-center" title="delete-btn">Delete</button>
 				<!-- <button type="submit" value="DELETE" class="btn-nav btn btn-danger fw-custom d-flex align-items-center justify-content-center" title="delete-btn"><i class="fa-solid fa-trash"></i></button> -->
@@ -35,8 +35,8 @@
 		<ul th:if="*{specialOffers.size() > 0}" class="list-unstyled mt-2">
 			<li th:each="specialOffer : *{specialOffers}" th:object="${specialOffer}" class="my-1 d-flex justify-content-between align-items-center"><span class="fw-custom me-1">[[*{title}]]:</span>
 				<span class="me-2 text-white">disponibile da 00:00 del [[*{getFormattedStartDate}]] fino a 00:00 del [[*{getFormattedEndDate}]]</span>
-					<a th:href="@{/pizzas/special-offer/update/{id}(id=*{id})}" class="btn-icon btn btn-warning fw-custom text-white def-link d-flex align-items-center justify-content-center me-2"><i class="fa-solid fa-pencil"></i></a>
-					<form th:action="@{/pizzas/special-offer/delete/{id}(id=*{id})}" method="POST" class="d-inline m-0" onsubmit="return confirm('Confirm deletion of this offer?')">
+					<a sec:authorize="hasAnyAuthority('ADMIN')"  th:href="@{/pizzas/special-offer/update/{id}(id=*{id})}" class="btn-icon btn btn-warning fw-custom text-white def-link d-flex align-items-center justify-content-center me-2"><i class="fa-solid fa-pencil"></i></a>
+					<form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{/pizzas/special-offer/delete/{id}(id=*{id})}" method="POST" class="d-inline m-0" onsubmit="return confirm('Confirm deletion of this offer?')">
 						<!-- * aggiungere DELETE come value -->
 						<!-- <button type="submit" value="DELETE" class="btn-nav btn btn-danger fw-custom d-flex align-items-center justify-content-center ms-2" title="Delete offer">Delete Offer</button> -->
 						<button type="submit" value="DELETE" class="btn-icon btn btn-danger fw-custom d-flex align-items-center justify-content-center " title="Delete offer"><i class="fa-solid fa-trash"></i></button>

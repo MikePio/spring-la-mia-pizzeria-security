@@ -20,6 +20,8 @@ public class AuthConf {
   
     // * STEP 6.8 - AUTHENTICATION - aggiunte le rotte di accesso nel file di configurazione AuthConf 
 			http.csrf().disable().authorizeHttpRequests()
+      // per fare i test senza aver impostato le rotte
+      // .requestMatchers("/**").permitAll()
       // ! questa rotta è necessaria oppure le immagini, lo style, bootstrap, fontawesome ed altro potrebbero non funzionare 
       .requestMatchers("/css/**", "/js/**", "/img/**", "/webjars/**", "/font-awesome/**").permitAll()
           // * .permitAll() fa accedere tutti: USER, ADMIN o anche un utente che non ha fatto il login
@@ -28,14 +30,25 @@ public class AuthConf {
           // * protegge le rotte e ti fa accedere solo se sei USER o ADMIN
           .requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
           .requestMatchers("/pizzas").hasAnyAuthority("USER", "ADMIN")
-          // .requestMatchers("/pizzas/**").hasAnyAuthority("USER", "ADMIN")
-          // OPPURE (Soluzione + precisa)
+          .requestMatchers("/pizzas/create").hasAnyAuthority("USER", "ADMIN")
           .requestMatchers(new RegexRequestMatcher("/pizzas/[0-9]+", null)).hasAnyAuthority("USER", "ADMIN")
           // * protegge le rotte e ti fa accedere solo se sei ADMIN
           .requestMatchers("/ingredients").hasAuthority("ADMIN")
-          .requestMatchers("/ingredients/**").hasAuthority("ADMIN")
-          .and().formLogin().defaultSuccessUrl("/")
-          .and().logout();
+          .requestMatchers("/ingredients-create").hasAuthority("ADMIN")
+          .requestMatchers("/ingredients/delete/**").hasAuthority("ADMIN")
+          .requestMatchers("/pizzas/special-offer/delete/**").hasAuthority("ADMIN")
+          .requestMatchers(new RegexRequestMatcher("/pizzas/update/[0-9]+", null)).hasAnyAuthority("ADMIN")
+          .requestMatchers("/pizzas/update/**").hasAnyAuthority("ADMIN")
+          .requestMatchers("/pizzas/special-offer/**").hasAuthority("ADMIN")
+          .requestMatchers("/pizzas/special-offer/update/**").hasAuthority("ADMIN")
+          // .requestMatchers("/pizzas/**").hasAnyAuthority("ADMIN")
+          // ! NON FUNZIONANO (probabilmente è perché bisogna eliminare ci sono offerte speciali collegate a questa pizza e non è possibile eliminarla finché queste offerte speciali esistono)
+          .requestMatchers("/[0-9]+").hasAuthority("ADMIN")
+          .requestMatchers("/pizzas/delete/**").hasAuthority("ADMIN")
+          .requestMatchers(new RegexRequestMatcher("/pizzas/delete/[0-9]+", null)).hasAnyAuthority("ADMIN")
+          
+          .and().formLogin().defaultSuccessUrl("/pizzas")
+          .and().logout(logout -> logout.logoutSuccessUrl("/pizzas"));
 
     return http.build();
 	}
