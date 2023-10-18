@@ -1,4 +1,5 @@
 <header class="bg-dark" style="background-color: rgba(0, 0, 0, 0.2) !important;">
+  <!-- * STEP 6.7 - AUTHENTICATION - aggiunta una sezione nell'header per accedere al login o al logout -->
   <div class="d-flex justify-content-end align-items-center w-100 p-2 px-3 pb-0">
     <h6 sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
       <span class="text-white">Hi </span>
