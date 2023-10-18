@@ -17,7 +17,7 @@ h1, span {
   color: #0282f9;
 }
 
-header a, .def-link {
+header .nav-index a, .def-link {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -25,7 +25,10 @@ header a, .def-link {
 
 /* navbar */
 .nav-index {
-  height: 80px;
+  /* altezza da impostare SENZA la sezione del login-logut */
+  /* height: 80px; */
+  /* margine da impostare CON la sezione del login-logut */
+  margin-bottom: 10px;
 }
 
 .search-bar{

@@ -1,0 +1,11 @@
+<!-- non utilizzato ma può essere utile in futuro o come template -->
+<div class="d-flex justify-content-end align-items-center w-100 p-2 px-3 pb-0">
+  <h6 sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+    <span class="text-white">Hi </span>
+    <span class="" sec:authentication="name"></span><span class="text-white">! - </span>
+    <a href="/logout" class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover">Logout</a>
+  </h6>
+  <h6 sec:authorize="!hasAnyAuthority('USER', 'ADMIN')">
+    <a href="/login" class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover">Login</a> 
+  </h6>
+</div>

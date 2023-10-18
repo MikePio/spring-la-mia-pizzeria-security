@@ -1,4 +1,14 @@
 <header class="bg-dark" style="background-color: rgba(0, 0, 0, 0.2) !important;">
+  <div class="d-flex justify-content-end align-items-center w-100 p-2 px-3 pb-0">
+    <h6 sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+      <span class="text-white">Hi </span>
+      <span class="" sec:authentication="name"></span><span class="text-white">! - </span>
+      <a href="/logout" class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover">Logout</a>
+    </h6>
+    <h6 sec:authorize="!hasAnyAuthority('USER', 'ADMIN')">
+      <a href="/login" class="link-light link-offset-2 link-underline-opacity-75 link-underline-opacity-100-hover">Login</a> 
+    </h6>
+  </div>
   <nav class="nav-index d-flex align-items-center d-flex justify-content-around w-100 px-1">
     <div class="h-100 d-flex align-items-center justify-content-center"><a href="/"><h3 class="mt-1">Pizzeria Italia</h3></a></div>
     <div class="d-flex align-items-center">
@@ -8,5 +18,5 @@
         <button  type="submit"  value="SEARCH"  class="btn-nav btn btn-primary d-flex align-items-center justify-content-center">Search</button>
       </form>
       </div>
-  </nav>
+    </nav>
 </header>
