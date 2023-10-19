@@ -41,11 +41,11 @@ public class AuthConf {
           .requestMatchers("/pizzas/update/**").hasAnyAuthority("ADMIN")
           .requestMatchers("/pizzas/special-offer/**").hasAuthority("ADMIN")
           .requestMatchers("/pizzas/special-offer/update/**").hasAuthority("ADMIN")
-          // .requestMatchers("/pizzas/**").hasAnyAuthority("ADMIN")
-          // ! NON FUNZIONANO (probabilmente è perché bisogna eliminare ci sono offerte speciali collegate a questa pizza e non è possibile eliminarla finché queste offerte speciali esistono)
-          .requestMatchers("/[0-9]+").hasAuthority("ADMIN")
           .requestMatchers("/pizzas/delete/**").hasAuthority("ADMIN")
-          .requestMatchers(new RegexRequestMatcher("/pizzas/delete/[0-9]+", null)).hasAnyAuthority("ADMIN")
+          // oppure
+          // .requestMatchers(new RegexRequestMatcher("/pizzas/delete/[0-9]+", null)).hasAnyAuthority("ADMIN")
+          // potrebbe essere utile in un altro progetto
+          // .requestMatchers("/[0-9]+").hasAuthority("ADMIN")
           
           .and().formLogin().defaultSuccessUrl("/pizzas")
           .and().logout(logout -> logout.logoutSuccessUrl("/pizzas"));

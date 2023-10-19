@@ -197,10 +197,20 @@ public class PizzaController {
     return "redirect:/pizzas";
   }
   // * DELETE - STEP 2 - implementare nel controller il metodo delete di PizzaService il metodo e creare il form per l'eliminazione 
+  // ! per eliminare una pizza è necessario eliminare PRIMA gli "ingredienti associati"(MANY) e DOPO la "singola pizza"(ONE) 
 	@PostMapping("/pizzas/delete/{id}")
 	public String deletePizza(@PathVariable int id) {
 		
 		Pizza pizza = pizzaService.findById(id);
+
+    // * Step 3 - eliminazione degli ingredienti associati ad una pizza - dichiaro la lista di offerte speciali associate a una pizza ottenuta con il metodo findByPizza in modo da poterla ciclare per eliminare le offerte speciali associate alla pizza specificata
+		List<SpecialOffer> specialOffers = specialOfferService.findByPizza(pizza);
+    // * Step 4 - eliminazione degli ingredienti associati ad una pizza - ciclo la lista per ottenere ogni offerta speciale associata alla pizza (perché possono esserci più offerte speciali associate ad una pizza e non una sola)
+    for (SpecialOffer specialOffer : specialOffers) {
+      // * Step 5 - eliminazione degli ingredienti associati ad una pizza - elimina nella tabella special_offer gli ingredienti associati/collegati alla pizza
+      specialOfferService.delete(specialOffer);
+    }
+
 		pizzaService.deletePizza(pizza);
 		
 		return "redirect:/pizzas";

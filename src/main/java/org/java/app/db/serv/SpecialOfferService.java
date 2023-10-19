@@ -2,6 +2,7 @@ package org.java.app.db.serv;
 
 import java.util.List;
 
+import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.SpecialOffer;
 import org.java.app.db.repo.SpecialOfferRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,9 @@ public class SpecialOfferService {
 
     specialOfferRepo.delete(specialOffer);
   }
+  
+  // * Step 2 - eliminazione degli ingredienti associati ad una pizza - questo metodo restituisce una lista di offerte speciali associate alla pizza specificata
+	public List<SpecialOffer> findByPizza(Pizza pizza) {
+		return specialOfferRepo.findByPizza(pizza);
+	}
 }
