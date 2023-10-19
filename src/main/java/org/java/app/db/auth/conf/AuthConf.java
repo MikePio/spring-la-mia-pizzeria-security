@@ -30,7 +30,7 @@ public class AuthConf {
           // * protegge le rotte e ti fa accedere solo se sei USER o ADMIN
           .requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
           .requestMatchers("/pizzas").hasAnyAuthority("USER", "ADMIN")
-          .requestMatchers("/pizzas/create").hasAnyAuthority("USER", "ADMIN")
+          .requestMatchers("/pizza-create").hasAnyAuthority("USER", "ADMIN")
           .requestMatchers(new RegexRequestMatcher("/pizzas/[0-9]+", null)).hasAnyAuthority("USER", "ADMIN")
           // * protegge le rotte e ti fa accedere solo se sei ADMIN
           .requestMatchers("/ingredients").hasAuthority("ADMIN")
